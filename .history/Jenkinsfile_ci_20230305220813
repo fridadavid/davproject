@@ -43,7 +43,7 @@ stage('unit test'){
                 sh 'mvn -s settings.xml checkstyle:checkstyle'
             }
         }
-        /*
+        
 stage('code analysis with sonarqube') {
           environment {
              scannerHome = tool "${sonarscanner}"
@@ -94,7 +94,6 @@ stage('upload artifacts to nexus'){
      )
             }
         }
-        */
 }
 
 

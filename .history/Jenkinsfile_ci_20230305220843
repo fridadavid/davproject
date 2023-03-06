@@ -94,7 +94,7 @@ stage('upload artifacts to nexus'){
      )
             }
         }
-        */
+        
 }
 
 
