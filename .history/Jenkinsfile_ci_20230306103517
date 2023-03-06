@@ -80,7 +80,7 @@ stage('quality Gate') {
                }  
             }
         }
-        */
+        
     stage('upload artifacts to nexus'){
             steps {
                  nexusArtifactUploader(

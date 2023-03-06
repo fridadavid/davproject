@@ -72,7 +72,7 @@ stage('unit test') {
             
           }
         }
-        /*
+        
 stage('quality Gate') {
             steps  {
                timeout(time: 5, unit: 'MINUTES') {
@@ -80,7 +80,6 @@ stage('quality Gate') {
                }  
             }
         }
-        */
     stage('upload artifacts to nexus'){
             steps {
                  nexusArtifactUploader(
