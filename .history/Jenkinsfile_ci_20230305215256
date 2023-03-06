@@ -65,14 +65,37 @@ stage('code analysis with sonarqube') {
         }
 
     }
-    stage('quality Gate') {
+}
+
+        stage('code analysis with sonarqube') {
+          environment {
+             scannerHome = tool "${sonarscanner}"
+          }
+
+          steps {
+            withSonarQubeEnv("${sonarserver1}") {
+               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=davepro-sonar \
+                   -Dsonar.projectName=davpro-sonar \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+            }
+
+            
+          }
+        }
+        stage('quality Gate') {
             steps  {
                timeout(time: 1, unit: 'HOURS') {
                waitForQualityGate abortPipeline: true
                }  
             }
         }
-stage('upload artifacts to nexus'){
+    
+        stage('upload artifacts to nexus'){
             steps {
                  nexusArtifactUploader(
         nexusVersion: 'nexus3',
@@ -93,6 +116,9 @@ stage('upload artifacts to nexus'){
      )
             }
         }
+    }
 }
 
+    
+    
 

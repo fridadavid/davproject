@@ -1,6 +1,6 @@
 pipeline {  
-    agent any
-    tools {
+	agent any
+	tools {
         maven "maven3.9.0"
         jdk "davjdk8"
     }
@@ -20,9 +20,9 @@ pipeline {
         SONARSCANNER = "sonarscanner"
         SONARSERVER = "sonarserver"
     }
-    
-    stages {
-        stage('Build') {
+	
+    stages{
+        stage('Build'){
             steps {
                 sh 'mvn -s settings.xml -DskipTests install'
             }
@@ -33,18 +33,21 @@ pipeline {
                 }
             }
         }
-stage('unit test'){
+    
+	stage('unit test'){
             steps {
                 sh 'mvn  -s settings.xml test'
             }
-    }
-    stage ('checkstyle code analysis'){
+        }
+	
+        stage ('checkstyle code analysis'){
             steps {
                 sh 'mvn -s settings.xml checkstyle:checkstyle'
             }
         }
-stage('code analysis with sonarqube') {
-          environment {
+
+        stage('code analysis with sonarqube') {
+		  environment {
              scannerHome = tool "${sonarscanner}"
           }
 
@@ -63,16 +66,15 @@ stage('code analysis with sonarqube') {
             
           }
         }
-
-    }
-    stage('quality Gate') {
+        stage('quality Gate') {
             steps  {
                timeout(time: 1, unit: 'HOURS') {
                waitForQualityGate abortPipeline: true
-               }  
+            }  
             }
         }
-stage('upload artifacts to nexus'){
+    
+        stage('upload artifacts to nexus'){
             steps {
                  nexusArtifactUploader(
         nexusVersion: 'nexus3',
@@ -87,12 +89,15 @@ stage('upload artifacts to nexus'){
             artifactId: 'davapp',
             classifier: '',
             file: 'target/davpro-sonar-v1.war',
-            type: 'war'
-            ]
+            type: 'war
+            
         ]
      )
             }
         }
+    }
 }
 
+    
+    
 

@@ -33,17 +33,20 @@ pipeline {
                 }
             }
         }
-stage('unit test'){
+    
+    stage('unit test'){
             steps {
                 sh 'mvn  -s settings.xml test'
             }
     }
-    stage ('checkstyle code analysis'){
+    
+        stage ('checkstyle code analysis'){
             steps {
                 sh 'mvn -s settings.xml checkstyle:checkstyle'
             }
         }
-stage('code analysis with sonarqube') {
+
+        stage('code analysis with sonarqube') {
           environment {
              scannerHome = tool "${sonarscanner}"
           }
@@ -63,16 +66,15 @@ stage('code analysis with sonarqube') {
             
           }
         }
-
-    }
-    stage('quality Gate') {
+        stage('quality Gate') {
             steps  {
                timeout(time: 1, unit: 'HOURS') {
                waitForQualityGate abortPipeline: true
                }  
             }
         }
-stage('upload artifacts to nexus'){
+    
+        stage('upload artifacts to nexus'){
             steps {
                  nexusArtifactUploader(
         nexusVersion: 'nexus3',
@@ -93,6 +95,9 @@ stage('upload artifacts to nexus'){
      )
             }
         }
+    }
 }
 
+    
+    
 
