@@ -138,11 +138,8 @@
                      <artifactId>maven-war-plugin</artifactId>
                      <version>3.2.2</version>
                     </plugin>
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-resources-plugin</artifactId>
-      <version>2.6</version>
-    </plugin>
+ 		    <plugin>
+            
  		        <groupId>org.jacoco</groupId>
  		        <artifactId>jacoco-maven-plugin</artifactId>
 			<version>0.8.4</version>
