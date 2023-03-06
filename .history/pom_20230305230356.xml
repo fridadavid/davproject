@@ -136,7 +136,7 @@
 		    <plugin>
                      <groupId>org.apache.maven.plugins</groupId>
                      <artifactId>maven-war-plugin</artifactId>
-                     <version>3.2.2</version>
+                     <version>3.</version>
                     </plugin>
  		    <plugin>
  		        <groupId>org.jacoco</groupId>
@@ -166,11 +166,5 @@
       <id>${NEXUS-GRP-REPO}</id>
       <url>http://${NEXUSIP}:${NEXUSPORT}/repository/${NEXUS-GRP-REPO}/</url>
     </repository>
-    <repositories>
-  <repository>
-    <id>central</id>
-    <url>https://repo.maven.apache.org/maven2</url>
-  </repository>
-</repositories>
   </repositories>
 </project>
