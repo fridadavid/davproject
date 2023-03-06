@@ -26,11 +26,7 @@ pipeline {
     }
     
     stages {
-        stage ('code checkout'){
-            steps {
-                git branch: 'ci-jenkins', credentialsId: 'gitcred', url: 'https://github.com/fridadavid/davproject.git'
-            }
-        }
+        stage ('code checkout')
         stage('Build') {
             steps {
                 sh  'mvn -s settings.xml clean install -U'
