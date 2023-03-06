@@ -20,7 +20,7 @@ pipeline {
         NEXUS_GRP_REPO = "dave-group-repo"
         NEXUSIP = "172.31.18.75"
         NEXUSPORT = "8081"
-        NEXUS_LOGIN = "nexuslogin"
+        NEXUS_LO = "nexuslogin"
         SONARSCANNER = "sonarscanner"
         SONARSERVER = "sonarserver"
     }
