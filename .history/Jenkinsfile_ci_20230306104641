@@ -95,7 +95,8 @@ stage('quality Gate') {
             [
             artifactId: 'davapp',
             classifier: '',
-            file: 'target/davproject.war',
+            file: 'target/
+davproject.war',
             type: 'war'
             ]
         ]
