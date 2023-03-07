@@ -117,7 +117,7 @@ stage('quality Gate') {
                 }
             }
         }
-         stage('Push application image to erc registry'){
+         stage('application image'){
             steps {
                 script{
                     docker.withRegistry(davprojectRegistry, registryCredential){ 
