@@ -27,7 +27,7 @@ pipeline {
         applicationRegistry = "451445594773.dkr.ecr.us-east-1.amazonaws.com/davecr-repo"
         davprojectRegistry = "https://451445594773.dkr.ecr.us-east-1.amazonaws.com"
         cluster "devcluster"
-        service = "devappsvc"
+        service = "dvappsvc"
 
         
 
