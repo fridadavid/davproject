@@ -26,15 +26,48 @@ pipeline {
         registryCredential = "ecr:us-east-1:awscredential"
         applicationRegistry = "451445594773.dkr.ecr.us-east-1.amazonaws.com/davecr-repo"
         davprojectRegistry = "https://451445594773.dkr.ecr.us-east-1.amazonaws.com"
-        cluster = "ecs-devcluster"
-        service = "dev_service"
-
+        cluster = "devcluster"
+        service = "devappsvc"
 
         
 
     }
     
     stages {
+        stage('checkout'){
+            steps{
+                 git branch: 'main', credentialsId: 'gitcred', url: 'https://github.com/fridadavid/dev-ecsterra.git'
+            }  
+        }
+        stage('create ecs infrastuctures'){
+			steps{
+                script {
+                    dir('ecs'){
+                sh "terraform init"
+				sh "terraform fmt"
+				sh "terraform validate"
+				sh "terraform plan"
+				sh "terraform apply"
+                sleep
+                    }
+                }
+			}
+		}
+        /*
+        stage('createInfra-eks'){
+			steps{
+                script {
+                    dir('eks'){
+                sh "terraform init"
+				sh "terraform fmt"
+				sh "terraform validate"
+				sh "terraform plan --var-file=variables/dev.tfvars"
+				sh "terraform apply --var-file=variables/dev.tfvars --auto-approve"
+                    }
+                }
+			}
+		}
+     */
         stage ('code checkout'){
             steps {
                 git branch: 'ci-jenkins', credentialsId: 'gitcred', url: 'https://github.com/fridadavid/davproject.git'

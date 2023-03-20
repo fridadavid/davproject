@@ -26,15 +26,15 @@ pipeline {
         registryCredential = "ecr:us-east-1:awscredential"
         applicationRegistry = "451445594773.dkr.ecr.us-east-1.amazonaws.com/davecr-repo"
         davprojectRegistry = "https://451445594773.dkr.ecr.us-east-1.amazonaws.com"
-        cluster = "ecs-devcluster"
-        service = "dev_service"
-
+        cluster = "devcluster"
+        service = "devappsvc"
 
         
 
     }
     
     stages {
+        
         stage ('code checkout'){
             steps {
                 git branch: 'ci-jenkins', credentialsId: 'gitcred', url: 'https://github.com/fridadavid/davproject.git'
